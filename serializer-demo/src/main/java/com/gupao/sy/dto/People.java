@@ -1,13 +1,4 @@
-package com.gupao.sy.dto;/**
- * 应用模块名称<p>
- * 代码描述<p>
- * Copyright: Copyright (C) 2019 XXX, Inc. All rights reserved. <p>
- * Company: 快钱<p>
- *
- * @author yong.shi.nj
- * @since 2019/1/4 17:08
- */
-
+package com.gupao.sy.dto;
 import java.io.Serializable;
 
 /**
@@ -21,6 +12,8 @@ public class People implements Serializable {
     private static final long serialVersionUID = -8606501002336174116L;
     private String name;
     private Integer age;
+
+    private Email email;
 
     public String getName() {
         return name;
@@ -38,11 +31,20 @@ public class People implements Serializable {
         this.age = age;
     }
 
+    public Email getEmail() {
+        return email;
+    }
+
+    public void setEmail(Email email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
-        return "com.gupao.sy.common.People{" +
+        return "People{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
+                ", email=" + email +
                 '}';
     }
 }

@@ -1,6 +1,8 @@
 package com.gupao.sy.common;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -17,25 +19,39 @@ public class JavaSerializer implements ISerializer {
     public <T> byte[] serializer(T obj) {
         ObjectOutputStream oos = null;
         try {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            oos = new ObjectOutputStream(bos);
+            oos = new ObjectOutputStream(new FileOutputStream("E://people.txt"));
             oos.writeObject(obj);
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            if(oos != null){
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return null;
     }
 
-    public <T> T deserializer(byte[] bs) {
-        ObjectInputStream ois;
+    public <T> T deserializer(byte[] data, Class<T> clazz) {
+        ObjectInputStream ois = null;
         try {
-            ByteArrayInputStream bis = new ByteArrayInputStream(bs);
-            ois = new ObjectInputStream(bis);
+            ois = new ObjectInputStream(new FileInputStream("E://people.txt"));
             return (T)ois.readObject();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        }finally {
+            if(ois != null){
+                try {
+                    ois.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return null;
     }

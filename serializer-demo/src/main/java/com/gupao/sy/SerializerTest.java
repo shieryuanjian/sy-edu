@@ -1,6 +1,8 @@
 package com.gupao.sy;
 
+import com.gupao.sy.common.ISerializer;
 import com.gupao.sy.common.JavaSerializer;
+import com.gupao.sy.common.JsonSerializer;
 import com.gupao.sy.dto.People;
 
 /**
@@ -16,9 +18,15 @@ public class SerializerTest {
         p.setName("shiyong");
         p.setAge(10);
 
-        JavaSerializer javaSerializer = new JavaSerializer();
-        javaSerializer.serializer(p);
+        ISerializer serializer = new JavaSerializer();
+        serializer.serializer(p);
 
-        System.out.println(javaSerializer.deserializer(null,null));
+        System.out.println(serializer.deserializer(null,null));
+
+        serializer = new JsonSerializer();
+        byte[] b = serializer.serializer(p);
+        System.out.println(serializer.deserializer(b,People.class));
+
+
     }
 }

@@ -20,6 +20,5 @@ public class SerializerTest {
         javaSerializer.serializer(p);
 
         System.out.println(javaSerializer.deserializer(null,null));
-
     }
 }
